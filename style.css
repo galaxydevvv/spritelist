@@ -1,0 +1,562 @@
+:root {
+  color-scheme: dark;
+  --bg: #090b10;
+  --panel: #131821;
+  --panel-2: #1a2230;
+  --line: #2f3a4e;
+  --text: #f7fbff;
+  --muted: #a5b1c2;
+  --cyan: #27e8ff;
+  --green: #37df74;
+  --gold: #ffd23f;
+  --red: #ff4d5f;
+  --rare: #0872bd;
+  --epic: #7c29bf;
+  --legendary: #b75f19;
+  --mythic: #a47a27;
+  --special-a: #49f4c7;
+  --special-b: #ed7cff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, rgba(39, 232, 255, 0.12), transparent 28%),
+    linear-gradient(315deg, rgba(255, 210, 63, 0.1), transparent 24%),
+    var(--bg);
+  color: var(--text);
+  font-family: Oswald, Impact, sans-serif;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  background: rgba(9, 11, 16, 0.88);
+  border-bottom: 3px solid rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 260px;
+}
+
+.brand-mark {
+  width: 54px;
+  height: 54px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.5));
+}
+
+h1,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(28px, 4vw, 54px);
+  font-style: italic;
+  line-height: 0.95;
+  text-shadow: 3px 3px 0 #000;
+}
+
+.brand p {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 220px));
+  gap: 12px;
+}
+
+.stat {
+  padding: 10px 12px;
+  background: var(--panel);
+  border: 2px solid var(--line);
+  border-radius: 8px;
+}
+
+.stat span,
+.field span,
+.toolbar span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.stat strong {
+  display: block;
+  margin: 1px 0 7px;
+  font-size: 22px;
+}
+
+.meter {
+  height: 10px;
+  overflow: hidden;
+  background: #080b10;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+}
+
+.meter i {
+  display: block;
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--green), #a7ffbf);
+  transition: width 160ms ease;
+}
+
+.stat-gold .meter i {
+  background: linear-gradient(90deg, #c79414, var(--gold));
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 285px minmax(0, 1fr);
+  gap: 18px;
+  padding: 20px;
+}
+
+.controls {
+  position: sticky;
+  top: 106px;
+  align-self: start;
+  display: grid;
+  gap: 14px;
+  padding: 16px;
+  background: rgba(19, 24, 33, 0.95);
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  box-shadow: inset 0 0 24px rgba(0, 0, 0, 0.36);
+}
+
+.controls.collections-mode .sprite-only {
+  display: none;
+}
+
+.field {
+  display: grid;
+  gap: 7px;
+}
+
+input[type="search"],
+select {
+  width: 100%;
+  min-height: 42px;
+  padding: 8px 10px;
+  color: var(--text);
+  background: #090d14;
+  border: 2px solid var(--line);
+  border-radius: 6px;
+  outline: none;
+}
+
+input[type="search"]:focus,
+select:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(39, 232, 255, 0.14);
+}
+
+.segments {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  overflow: hidden;
+  border: 2px solid var(--line);
+  border-radius: 6px;
+}
+
+.segments button,
+.actions button {
+  min-height: 40px;
+  color: var(--text);
+  background: #0b1018;
+  border: 0;
+  cursor: pointer;
+}
+
+.segments button {
+  color: var(--muted);
+}
+
+.segments button.active {
+  color: #061015;
+  background: var(--cyan);
+}
+
+.view-tabs {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 34px;
+  color: var(--text);
+}
+
+.check input {
+  appearance: none;
+  width: 46px;
+  height: 24px;
+  margin: 0;
+  background: #090d14;
+  border: 2px solid var(--line);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.check input::before {
+  content: "";
+  display: block;
+  width: 14px;
+  height: 14px;
+  margin: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 140ms ease;
+}
+
+.check input:checked {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.check input:checked::before {
+  transform: translateX(21px);
+}
+
+.actions {
+  display: grid;
+  gap: 8px;
+}
+
+.actions button {
+  border-right: 4px solid var(--cyan);
+  border-radius: 6px;
+  text-align: left;
+  padding: 0 12px;
+}
+
+.actions button:hover {
+  background: #111a27;
+}
+
+.actions .danger {
+  border-right-color: var(--red);
+}
+
+.content {
+  min-width: 0;
+}
+
+.toolbar {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.toolbar strong {
+  color: var(--cyan);
+  font-size: 22px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(142px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr 42px;
+  min-height: 190px;
+  overflow: hidden;
+  background: #0f141d;
+  border: 3px solid #1d2635;
+  border-radius: 8px;
+  box-shadow: 0 14px 24px rgba(0, 0, 0, 0.38);
+  cursor: pointer;
+  transition: transform 120ms ease, border-color 120ms ease, filter 120ms ease;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #fff;
+}
+
+.card.owned {
+  border-color: var(--green);
+}
+
+.card.mastered {
+  border-color: var(--gold);
+  box-shadow: 0 0 24px rgba(255, 210, 63, 0.25), 0 14px 24px rgba(0, 0, 0, 0.38);
+}
+
+.art {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 146px;
+  overflow: hidden;
+}
+
+.card[data-rarity="Rare"] .art { background: linear-gradient(#104d81, #081d37); }
+.card[data-rarity="Epic"] .art { background: linear-gradient(#592078, #21082f); }
+.card[data-rarity="Legendary"] .art { background: linear-gradient(#85430b, #2f1703); }
+.card[data-rarity="Mythic"] .art { background: linear-gradient(#7d601f, #2a2108); }
+.card[data-rarity="Special"] .art {
+  background:
+    linear-gradient(135deg, rgba(73, 244, 199, 0.34), rgba(237, 124, 255, 0.34)),
+    linear-gradient(#1b2739, #0a0d15);
+}
+
+.art img {
+  width: 84%;
+  height: 84%;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 12px rgba(0, 0, 0, 0.6));
+}
+
+.badge,
+.rarity,
+.master-button {
+  position: absolute;
+  z-index: 2;
+  font-weight: 900;
+}
+
+.badge {
+  top: 7px;
+  left: 7px;
+  padding: 2px 7px;
+  background: #202a39;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.owned .badge {
+  background: var(--green);
+  color: #031009;
+}
+
+.mastered .badge {
+  background: var(--gold);
+  color: #120d00;
+}
+
+.unreleased .badge {
+  background: var(--red);
+  color: #fff;
+}
+
+.rarity {
+  bottom: 0;
+  left: 0;
+  padding: 2px 17px 2px 7px;
+  background: var(--rare);
+  color: #d7f8ff;
+  clip-path: polygon(0 0, 84% 0, 100% 100%, 0 100%);
+  font-size: 11px;
+}
+
+.card[data-rarity="Epic"] .rarity { background: var(--epic); color: #ffc7ff; }
+.card[data-rarity="Legendary"] .rarity { background: var(--legendary); color: #ffd08c; }
+.card[data-rarity="Mythic"] .rarity { background: var(--mythic); color: #fff2bd; }
+.card[data-rarity="Special"] .rarity {
+  background: linear-gradient(90deg, var(--special-a), var(--special-b));
+  color: #080b10;
+}
+
+.master-button {
+  right: 7px;
+  bottom: 7px;
+  min-width: 34px;
+  min-height: 28px;
+  padding: 0 8px;
+  color: #120d00;
+  background: var(--gold);
+  border: 0;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+.card:not(.owned) .master-button {
+  display: none;
+}
+
+.title {
+  display: grid;
+  place-items: center;
+  padding: 5px;
+  background: rgba(12, 16, 23, 0.96);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.empty {
+  padding: 34px;
+  color: var(--muted);
+  background: rgba(19, 24, 33, 0.8);
+  border: 2px dashed var(--line);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.collections-panel {
+  min-width: 0;
+}
+
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(255px, 1fr));
+  gap: 12px;
+}
+
+.collection-card {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  min-height: 158px;
+  background: rgba(19, 24, 33, 0.94);
+  border: 2px solid var(--line);
+  border-radius: 8px;
+  box-shadow: inset 0 0 22px rgba(0, 0, 0, 0.24);
+}
+
+.collection-card.complete {
+  border-color: var(--green);
+  box-shadow: 0 0 22px rgba(55, 223, 116, 0.18), inset 0 0 22px rgba(0, 0, 0, 0.24);
+}
+
+.collection-head {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.collection-check {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  color: var(--muted);
+  background: #090d14;
+  border: 2px solid var(--line);
+  border-radius: 7px;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.complete .collection-check {
+  color: #051109;
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.collection-title {
+  display: grid;
+  gap: 2px;
+}
+
+.collection-title strong {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.collection-title span,
+.collection-missing {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.collection-progress {
+  display: grid;
+  gap: 6px;
+}
+
+.collection-progress-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.collection-progress-row strong {
+  color: var(--text);
+}
+
+.collection-missing {
+  min-height: 30px;
+  line-height: 1.25;
+}
+
+@media (max-width: 820px) {
+  .topbar,
+  .layout {
+    display: grid;
+  }
+
+  .stats,
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .controls {
+    position: static;
+  }
+
+  .toolbar {
+    display: grid;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+    gap: 9px;
+  }
+
+  .collections-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: 158px;
+  }
+
+  .title {
+    font-size: 13px;
+  }
+}
